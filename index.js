@@ -10,19 +10,13 @@ module.exports = React.createClass({
   displayName: 'ReactGateway',
 
   propTypes: {
-    to: React.PropTypes.instanceOf(SafeHTMLElement),
+    to: React.PropTypes.instanceOf(SafeHTMLElement).isRequired,
     className: React.PropTypes.string,
     children: React.PropTypes.element.isRequired
   },
 
-  getDefaultProps: function() {
-    return {
-      to: document.body
-    };
-  },
-
   componentDidMount: function() {
-    this.gatewayNode = document.createElement('div');
+    this.props.to.ownerDocument.createElement('div');
     if (this.props.className) this.gatewayNode.className = this.props.className;
     this.props.to.appendChild(this.gatewayNode);
     this.renderIntoGatewayNode(this.props);
